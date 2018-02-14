@@ -1,3 +1,4 @@
 *.csv
 *.patch
 *.json
+!sample_rules.csv

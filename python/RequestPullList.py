@@ -27,7 +27,7 @@ def main():
             break
         page += 1
         pages.extend(data)
-    with open(project + "-" + "pulls.json", "w") as file:
+    with open(project + "-pulls.json", "w") as file:
         json.dump(pages, file, indent=4)
 
 if __name__ == '__main__':
