@@ -24,26 +24,17 @@ df <- subset(df, TRUE, m_t_or_f)
 data_tran <- as(as.matrix(df[1:ncol(df)]), "transactions")
 
 rules <- apriori(data_tran,
-                 parameter = list(
+                 parameter = list(supp = 0.01,
                                   maxlen = 2,
                                   minlen = 1,
-                                  confidence = 0.001
+                                  confidence = 0.1
                                   ))
-rules <- rules[!is.redundant(rules)]
 
 # Get ini to fin rules
 ini_fin <- subset(rules,
-                lift > 1 &
-                !(rhs %in% metricses |
-                lhs %in% append(metrics_plus, metrics_minus)))
+                  rhs %in% metrics_plus &
+                  lhs %in% metricses)
 
-for (i in 1:length(metricses)){
-    metrics <- metricses[i]
-    ini_fin <- subset(ini_fin,
-                    !(lhs %in% c(metricses) &
-                      rhs %in% paste(metrics, "minus", sep = "_"))
-    )
-}
 ini_fin <- ini_fin[!is.redundant(ini_fin)]
 
 ini_fin_df <- data.frame(lhs = labels(lhs(ini_fin)),

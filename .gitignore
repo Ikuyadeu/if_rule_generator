@@ -1,4 +1,5 @@
 *.csv
 *.patch
 *.json
+*.pyc
 !sample_rules.csv
