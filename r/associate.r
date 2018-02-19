@@ -27,7 +27,7 @@ rules <- apriori(data_tran,
                  parameter = list(supp = 0.01,
                                   maxlen = 2,
                                   minlen = 1,
-                                  confidence = 0.1
+                                  confidence = 0.01
                                   ))
 
 # Get ini to fin rules
