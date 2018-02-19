@@ -8,18 +8,16 @@ Rule generator uses [association rule mining algorithm](https://en.wikipedia.org
 
 ## Rule example
 
-* LHS:
-* RHS:
-* Ori:
-* Rev:
-* Count:
-* Support:
-* All)num:
-* Confidence:
-* LHS_Count:
-* Lift:
-* Link:
-* Pull Link:
+* LHS: Left Hand Side in association rule mining
+* RHS: Right Hand Side in association rule mining
+* Ori: Original source code example
+* Rev: Revised source code example
+* Count: Count for a rule
+* All)num: All if changes
+* Support: Support score mearn (Count / All If changes)
+* LHS_Count: Count of LHS frequency
+* Confidence: Support / LHS count
+* Lift: Lift score on association rule
 
 ## Environment
 
@@ -49,7 +47,6 @@ R
 
 As the follow is used arguments in Rule generator
 
-* apiurl: URL of GitHub or GitHub Enterprise API(e.g. <https://api.github.com> or <http(s)://hostname/api/v3>)
 * user: GitHub user Id to access the GitHub
 * password: GitHub user password
 * owner: Project owner Id (if you want to collect PR on <https://github.com/octocat/Hello-World> owner is octocat)
@@ -69,7 +66,7 @@ cd ChangeRuleGenerator
 * Collect pull requests
 
 ```sh
-python3 python/RequestPullList.py apiurl user password owner project
+python3 python/RequestPullList.py https://api.github.com user password owner project
 ```
 
 * Collect patch data
