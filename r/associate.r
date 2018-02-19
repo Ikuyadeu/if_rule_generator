@@ -5,7 +5,7 @@ original <- read.csv("git_ori.csv", sep = ",",
 df <- read.csv("git_merged.csv")
 metricses <- names(original)
 m_t_or_f <- c("filename", "num", "ori", "rev")
-metricses <- metricses[5:length(metricses)]
+# metricses <- metricses[5:length(metricses)]
 metricses <- metricses[(1 + length(m_t_or_f)):length(metricses)]
 
 metrics_plus <- c()
@@ -31,16 +31,17 @@ rules <- apriori(data_tran,
                                   ))
 
 # Get ini to fin rules
-ini_fin <- subset(rules,
-                  rhs %in% metrics_plus &
-                  lhs %in% metricses)
+rules <- subset(rules,
+                lift > 1 &
+                rhs %in% metrics_plus &
+                lhs %in% metricses)
 
-ini_fin <- ini_fin[!is.redundant(ini_fin)]
+rules <- rules[!is.redundant(rules)]
 
-ini_fin_df <- data.frame(lhs = labels(lhs(ini_fin)),
-                        rhs = labels(rhs(ini_fin)),
-                        ini_fin@quality)
-ruledf <- ini_fin_df
+ruledf <- data.frame(lhs = labels(lhs(rules)),
+                     rhs = labels(rhs(rules)),
+                     rules@quality)
+ruledf <- ruledf[order(ruledf$confidence, decreasing = T), ]
 
 write.csv(ruledf, paste("proto_rule.csv", sep = ""),
           row.names = FALSE)
