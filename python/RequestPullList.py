@@ -1,5 +1,5 @@
 """
-Usage: python3 RequestPullList.py apiurl user password owner projects
+Usage: python3 python/RequestPullList.py apiurl owner project user password
 """
 import sys
 import json
@@ -11,10 +11,10 @@ def main():
     """
     args = sys.argv
     api = args[1]
-    user = args[2]
-    password = args[3]
-    owner = args[4]
-    project = args[5]
+    owner = args[2]
+    project = args[3]
+    user = args[4]
+    password = args[5]
     page = 1
     pages = []
     header = api + "/repos/" + owner + "/" + project + "/"
@@ -27,7 +27,7 @@ def main():
             break
         page += 1
         pages.extend(data)
-    with open(project + "-pulls.json", "w") as file:
+    with open(project + "/pulls.json", "w") as file:
         json.dump(pages, file, indent=4)
 
 if __name__ == '__main__':
