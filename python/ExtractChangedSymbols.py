@@ -47,7 +47,8 @@ def main():
     Main
     """
     args = sys.argv
-    outdir = args[1]
+    project = args[1]
+    outdir = project + "/diffs"   
     file_names = os.listdir(outdir)
 
     ori_result = []
@@ -68,8 +69,8 @@ def main():
                 rev_symbols.update(status)
                 rev_result.append(rev_symbols)
 
-    out_result(ori_result, "git_ori.csv")
-    out_result(rev_result, "git_rev.csv")
+    out_result(ori_result, project + "/git_ori.csv")
+    out_result(rev_result, project + "/git_rev.csv")
 
 if __name__ == '__main__':
     main()

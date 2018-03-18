@@ -1,5 +1,5 @@
 """
-Usage: python3 python/RequestCommits.py owner project user password
+Usage: python3 python/RequestDissList.py owner project user password
 """
 import sys
 import json
@@ -16,7 +16,7 @@ def main():
     user = args[3]
     password = args[4]
     pulls_file = project + "/pulls.json"
-    commits_file = project + "/commits.csv"
+    commits_file = project + "/diffs.csv"
     url_header = "https://github.com/" + owner + "/" + project + "/compare/"
     # out_dir = project + "/commits/"
     sha_fields = ["merge_commit_sha", "first_commit_sha", "url"]
