@@ -27,9 +27,13 @@ def main():
     commits_urls = [(x["_links"]["commits"]["href"], x["merge_commit_sha"]) for x in pulls]
 
     shas = []
-    for patch_url, merge_commit_sha in commits_urls:
+    commits_len = len(commits_urls)
+    for i, (patch_url, merge_commit_sha) in enumerate(commits_urls):
+        sys.stdout.write("\r%d / %d commits" % (i, commits_len))
         resp = requests.get(patch_url, auth=requests.auth.HTTPBasicAuth(user, password))
         data = json.loads(resp.content.decode('utf-8'))
+        if len(data) < 1:
+            continue
         first_commit_sha = data[0]["sha"]
         shas.append({"first_commit_sha": first_commit_sha,
         "merge_commit_sha": merge_commit_sha,

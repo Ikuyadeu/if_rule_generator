@@ -53,7 +53,9 @@ def main():
 
     ori_result = []
     rev_result = []
-    for file_name in file_names:
+    file_len = len(file_names)
+    for i, file_name in enumerate(file_names):
+        sys.stdout.write("\r%d / %d" % (i, file_len))
         with open(outdir + "/" + file_name, "r", encoding="utf-8") as file:
             try:
                 file_contents = file.read()

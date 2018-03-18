@@ -27,6 +27,7 @@ def main():
     with open(diffs_file, "r", encoding="utf-8") as diffs:
         reader = csv.DictReader(diffs)
         for i, diff in enumerate(reader):
+            sys.stdout.write("\r%d commits" % i)
             os.system("curl -s -u " +\
             user + ":" + password +\
             " -H \"Accept: application/vnd.github.v3.patch\" "
