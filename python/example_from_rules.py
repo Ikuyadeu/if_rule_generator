@@ -1,6 +1,6 @@
 """
 Add example from rules and merged
-python3 python/example_from_rules.py rule2.csv git_merged.csv complete_rules.csv
+python3 python/example_from_rules.py project
 """
 
 import csv
@@ -14,9 +14,10 @@ def main():
     symbols = symbols_set.SYMBOLS
 
     args = sys.argv
-    rules_file_path = args[1]
-    original_file_path = args[2]
-    complete_rules_path = args[3]
+    project = args[1]
+    rules_file_path = project + "/rules.csv"
+    original_file_path = project + "/git_merged.csv"
+    complete_rules_path = project + "/example_rules.csv"
 
     out_rules = []
 
@@ -51,10 +52,6 @@ def main():
                          "confidence", "lhs_count",
                          "lift"])
         writer.writerows(out_rules)
-
-
-    # for out_rule in out_rules:
-    #     print(out_rule)
 
 def str_to_percent(ori_str):
     """

@@ -10,7 +10,6 @@ df <- read.csv(paste(project, "git_merged.csv", sep = "/"))
 metricses <- names(original)
 m_t_or_f <- c("filename", "num", "ori", "rev")
 metricses <- metricses[5:length(metricses)]
-# metricses <- metricses[(1 + length(m_t_or_f)):length(metricses)]
 
 metrics_plus <- c()
 metrics_minus <- c()
