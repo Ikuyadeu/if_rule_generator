@@ -1,12 +1,16 @@
 library(arules)
+project <- "eclipse-collections"
+project <- "openj9"
+project <- "jetty.project"
 
-original <- read.csv("git_ori.csv", sep = ",",
+original <- read.csv(paste(project, "git_ori.csv", sep = "/"),
+                     sep = ",",
                      header = TRUE, row.names = NULL)
-df <- read.csv("git_merged.csv")
+df <- read.csv(paste(project, "git_merged.csv", sep = "/"))
 metricses <- names(original)
 m_t_or_f <- c("filename", "num", "ori", "rev")
-# metricses <- metricses[5:length(metricses)]
-metricses <- metricses[(1 + length(m_t_or_f)):length(metricses)]
+metricses <- metricses[5:length(metricses)]
+# metricses <- metricses[(1 + length(m_t_or_f)):length(metricses)]
 
 metrics_plus <- c()
 metrics_minus <- c()
@@ -17,7 +21,7 @@ for (i in 1:length(metricses)){
 }
 m_t_or_f <- append(metricses,
                    c(metrics_plus, metrics_minus))
-df <- subset(df, T, m_t_or_f)
+df <- subset(df, TRUE, m_t_or_f)
 
 # closed itemset
 df <- subset(df, TRUE, m_t_or_f)
@@ -43,5 +47,5 @@ ruledf <- data.frame(lhs = labels(lhs(rules)),
                      rules@quality)
 ruledf <- ruledf[order(ruledf$confidence, decreasing = T), ]
 
-write.csv(ruledf, paste("proto_rule.csv", sep = ""),
+write.csv(ruledf, paste(paste(project, "rules.csv", sep = "/"), sep = ""),
           row.names = FALSE)

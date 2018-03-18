@@ -1,6 +1,10 @@
-original <- read.csv("git_ori.csv", sep = ",",
+project <- "eclipse-collections"
+project <- "openj9"
+project <- "jetty.project"
+
+original <- read.csv(paste(project, "git_ori.csv", sep = "/"), sep = ",",
                      header = TRUE, row.names = NULL)
-revised <- read.csv("git_rev.csv", sep = ",",
+revised <- read.csv(paste(project, "git_rev.csv", sep = "/"), sep = ",",
                     header = TRUE, row.names = NULL)
 
 output <- data.frame()
@@ -40,5 +44,5 @@ new_merged <- merge(x = original, y = merged,
                     all = FALSE)
 
 write.csv(new_merged,
-          "git_merged.csv",
+          paste(project, "git_merged.csv", sep = "/"),
           quote = TRUE, row.names = FALSE)
