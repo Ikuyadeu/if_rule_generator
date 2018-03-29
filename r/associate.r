@@ -2,6 +2,7 @@ library(arules)
 project <- "eclipse-collections"
 project <- "openj9"
 project <- "jetty.project"
+project <- "development"
 
 original <- read.csv(paste(project, "git_ori.csv", sep = "/"),
                      sep = ",",
